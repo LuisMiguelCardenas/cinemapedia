@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class CostomBottomNavigation extends StatelessWidget {
-  const CostomBottomNavigation({super.key});
 
-  int getCurrentIndex(BuildContext context) {
+  final StatefulNavigationShell navigationShell;
+
+  const CostomBottomNavigation({super.key, required this.navigationShell});
+
+    int getCurrentIndex(BuildContext context) {
     final dynamic location = GoRouterState.of(context).fullPath;
     switch (location) {
       case '/':
@@ -37,17 +40,21 @@ class CostomBottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      onTap: (value) => onItemTapped(context, value),
-      elevation: 0,
-      currentIndex: getCurrentIndex(context),
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_max), label: 'Inicio'),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.label_outlined), label: 'Categorias'),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_outline), label: 'Favotritos'),
-      ],
+    return Scaffold(
+      
+      body: navigationShell,
+      
+      bottomNavigationBar: BottomNavigationBar(
+ 
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.home_max), label: 'Inicio'),
+          BottomNavigationBarItem(icon: Icon(Icons.label_outline), label: 'Categorías'),
+           BottomNavigationBarItem(icon: Icon(Icons.favorite_outlined), label: 'Favoritos'),
+        ],
+        currentIndex: getCurrentIndex(context),
+        onTap: (value) => onItemTapped(context, value),
+      ),
     );
   }
+
 }

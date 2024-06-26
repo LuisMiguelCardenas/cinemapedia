@@ -1,4 +1,3 @@
-import 'package:cinemapedia/presentation/widgets/widges.dart';
 import 'package:flutter/material.dart';
 
 
@@ -17,7 +16,7 @@ final Widget childView;
   Widget build(BuildContext context) {
     return Scaffold(
       body: childView,
-      bottomNavigationBar: const CostomBottomNavigation(),
+      // bottomNavigationBar: const CostomBottomNavigation(),
     );
   }
 }
